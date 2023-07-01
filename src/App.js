@@ -4,9 +4,8 @@ import './App.css';
 import Task from './components/Task';
 function App() {
   let [tasks,setTasks] = useState([]);
+  let [value,setValue] = useState('');
   
-  // let tasks=FetchData();
-
   useEffect(() =>{
         const getData = async () =>{
             const res = await fetch('https://jsonplaceholder.typicode.com/todos');
@@ -18,8 +17,22 @@ function App() {
         getData();
   },[]);
 
+  const handleSubmit = e =>{
+    e.preventDefault();
+
+    if(value!==''){
+      addTask();
+    }
+  
+  }
   function addTask(){
-    
+    setTasks([...tasks, {
+        "id": Date.now(),
+        "title": value,
+        "completed": false,
+        "isEditing":false}
+         ]);
+    setValue('');
   }
 
   function editTask(taskId){
@@ -43,8 +56,11 @@ function App() {
 
       <h1>Todo List App</h1>
       <div id="container">
-        <input placeholder="What is the task ?" className="add-task" id="add" />
-        <span id="total-tasks">Total tasks: <span id="tasks-counter">0</span></span>
+        <form onSubmit={handleSubmit}>
+          <input placeholder="What is the task ?" className="add-task" id="add" value={value} onChange={(e)=> setValue(e.target.value)}/>
+          <button className='add' type='submit'>Add</button>
+        </form>
+        <span id="total-tasks">Total tasks: <span id="tasks-counter">{tasks.length}</span></span>
         <ul id="list">
           { 
             tasks.map( (task) => (

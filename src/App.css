@@ -82,12 +82,24 @@
     text-align: center;
   }
   .add-task {
-    width: 100%;
+    width: 80%;
       outline: none;
       font-size: 15px;
       padding: 11px;
       border: 1px solid #f3f3f3;
       margin-bottom: 3px;
+  }
+  .add{
+      width: 20%;
+      outline: none;
+      font-size: 15px;
+      padding: 11px;
+      border: 1px solid #f3f3f3;
+      margin-bottom: 3px;
+      cursor:pointer;
+  }
+  .add:hover{
+    background-color: #e4e0e0;
   }
   #total-tasks {
     margin-bottom: 20px;
