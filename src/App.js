@@ -11,7 +11,6 @@ function App() {
             const res = await fetch('https://jsonplaceholder.typicode.com/todos');
             if(!res.ok) throw new Error("Oops! An erro has occured");
             const json = await res.json();
-            
             setTasks(json.slice(0,4));
         }
         getData();
