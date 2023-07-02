@@ -6,11 +6,9 @@ function EdtiTask({ task,update }){
 
     const handleSubmit = e =>{
         e.preventDefault();
-
         if( value !== ''){
-        update(task.id,value);
+            update(task.id,value);
         }
-  
     }
 
     return(
