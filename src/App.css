@@ -23,6 +23,9 @@
   ul li:hover {
     background: #f3f3f3;
   } 
+  li label{
+    cursor: pointer;
+  }
  .delete {
       height: 28px;
       padding: 5px 0px;
