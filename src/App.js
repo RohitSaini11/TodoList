@@ -2,6 +2,8 @@ import { useState, useEffect} from 'react';
 import './App.css';
 // import FetchData from './components/Fetchdata';
 import Task from './components/Task';
+import EditTask from './components/EditTask';
+
 function App() {
   let [tasks,setTasks] = useState([]);
   let [value,setValue] = useState('');
@@ -24,6 +26,7 @@ function App() {
     }
   
   }
+
   function addTask(){
     setTasks([...tasks, {
         "id": Date.now(),
@@ -34,8 +37,12 @@ function App() {
     setValue('');
   }
 
-  function editTask(taskId){
-    console.log("edit mode for",taskId);
+  function isEditing(taskId){
+    setTasks( tasks.map(task => task.id === taskId ? {...task, isEditing:true} : {...task,isEditing:false } ) );
+  }
+
+  function updateTask(taskId,value){
+    setTasks( tasks.map(task => task.id === taskId ? {...task, title:value , isEditing:false} : task ) );
   }
 
   function toggleTask(taskId){
@@ -47,7 +54,6 @@ function App() {
         return task.id !== Number(taskId);
     });
     setTasks(newTasks);
-    console.log("called!!");
   }
 
   return (
@@ -63,7 +69,8 @@ function App() {
         <ul id="list">
           { 
             tasks.map( (task) => (
-              <Task key={task.id} task={task} deleteTask={deleteTask} toggleTask={toggleTask} editTask={editTask} />
+              task.isEditing ?<EditTask task={task} update={updateTask} />:
+              <Task key={task.id} task={task} deleteTask={deleteTask} toggleTask={toggleTask} isEditing={isEditing} />
             ))
           }
         </ul>
