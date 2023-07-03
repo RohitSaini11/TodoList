@@ -1,6 +1,5 @@
 import { useState, useEffect} from 'react';
 import './App.css';
-// import FetchData from './components/Fetchdata';
 import Task from './components/Task';
 import EditTask from './components/EditTask';
 
@@ -114,7 +113,9 @@ function App() {
         <ul id="list">
           { 
             tasks.map( (task) => (
-              task.isEditing ?<EditTask key={task.id} task={task} update={updateTask} />:
+              task.isEditing ?
+              <EditTask key={task.id} task={task} update={updateTask} />
+              :
               <Task key={task.id} task={task} deleteTask={deleteTask} toggleTask={toggleTask} isEditing={isEditing} />
             ))
           }
